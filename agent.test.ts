@@ -56,8 +56,14 @@ test("textOf reads user turns from Responses input and chat messages", () => {
     );
 });
 
+type Sent = {
+    state: string;
+    questions: object;
+    messages: { content: string }[];
+};
+
 function run(body: unknown, jevStatus = 200) {
-    const calls: Record<string, any> = {};
+    const calls: Record<string, Sent> = {};
     const request = new Request("https://agent.test/", {
         method: "POST",
         body: JSON.stringify(body),
